@@ -1,0 +1,18 @@
+{
+  "name": "benkih-todo",
+  "version": "1.0.0",
+  "description": "This is a todo-list app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "todo",
+    "list",
+    "todolist",
+    "todo-list",
+    "benkih"
+  ],
+  "author": "Peter Ihimire",
+  "license": "ISC"
+}
