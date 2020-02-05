@@ -134,7 +134,7 @@ transform: rotate(45deg) translate(-2px, -11px)
 /* ---------- App Section ---------- */
 
 .main-wrapper{
-  padding: 15rem 0 0 0;
+  padding: 15rem 0 ;
   display: flex;
   justify-content: center;
 
@@ -254,6 +254,21 @@ button i {
 }
 
 /* ---------- End of App Section---------- */
+
+
+
+/* ---------- Footer Section ---------- */
+
+footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem;
+  background: var(--primaryColor);
+  color: var(--mainWhite);
+}
+
+/* ---------- End of Footer Section ---------- */
 
 
 
