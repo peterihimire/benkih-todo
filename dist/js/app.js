@@ -7,6 +7,8 @@ const todoInput = document.querySelector('#todo-input');
 const todoSubmit = document.querySelector('#todo-submit');
 const todoDisplay = document.querySelector('#todo-display');
 const todoBox = document.querySelector('#todo-box');
+const formWrapper = document.querySelector('#form-wrapper');
+
 let todoItemList = [];
 let todoID = 0;
 
@@ -72,7 +74,8 @@ const addTodo = (todo) => {
 
     </div>
   `;
-  todoBox.appendChild(div);
+  todoBox.insertBefore(div, formWrapper);
+  // todoBox.appendChild(div);
 }
 
 todoSubmit.addEventListener('click', (e) => {
