@@ -172,12 +172,31 @@ transform: rotate(45deg) translate(-2px, -11px)
 
 .item {
   display: grid;
-  grid-template-columns: 8fr 1fr;
+  grid-template-columns: 0.2fr 8fr 1fr;
   justify-content: space-between;
   padding: 1rem;
   border-bottom: solid .1rem var(--mainGrey);
   margin: 1rem 0 ;
   
+}
+
+.strike-through {
+  /* display: none; */
+  /* visibility: hidden; */
+}
+
+.item-check input[type="checkbox"]{
+  color: var(--primaryColor);
+  font-size: 5rem;
+  padding: 3rem;
+  background: var(--primaryColor);
+}
+
+.todo-check{
+  color: var(--primaryColor);
+  font-size: 2rem;
+  padding: 1rem;
+  background: var(--primaryColor);
 }
 
 .item-edit {
@@ -220,7 +239,6 @@ form{
 input[type="text"]{
   padding: 1rem ;
   font-size: 1.6rem;
-  color: var(--primaryColor);
   border: none;
   width: 100%;
   margin: 1rem 0 0 0;
@@ -238,7 +256,7 @@ button{
 }
 
 button i {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .error {

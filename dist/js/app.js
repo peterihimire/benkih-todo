@@ -59,6 +59,10 @@ const addTodo = (todo) => {
   const div = document.createElement('div');
   div.classList.add('item');
   div.innerHTML = `
+    <div class="item-check " data-id=${todo.id} >
+      <input type="checkbox" class="todo-check" value="on" >
+    </div>
+
     <div class="item-text " >
       <p  class="item-text-p" id="todo-display">${todo.name}</p>
     </div>
@@ -78,7 +82,68 @@ const addTodo = (todo) => {
   // todoBox.appendChild(div);
 }
 
+const editTodo = (todoitem) => {
+  let id = parseInt(todoitem.parentElement.dataset.id);
+  let singleTodo = todoitem.parentElement.parentElement.parentElement;
+  //remove from DOM
+  todoBox.removeChild(singleTodo);
+  //remove from todoItemList array
+  let individualTodo = todoItemList.filter( (todo) => todo.id === id);
+  //populate the remove todoItem from the array to the todoInput
+  todoInput.value = individualTodo[0].name;
+  //return the todo without the id & that gives us the updated todoItemList
+  let tempTodo = todoItemList.filter(todo => todo.id !== id);
+  todoItemList = tempTodo;
+
+  console.log(id);
+  console.log(singleTodo);
+  console.log(individualTodo)
+  console.log(tempTodo);
+  console.log(todoItemList);
+}
+
+const deleteTodo = (todoItem) => {
+  let id = parseInt(todoItem.parentElement.dataset.id);
+  let singleTodo = todoItem.parentElement.parentElement.parentElement;
+  todoBox.removeChild(singleTodo);
+  let individualTodo = todoItemList.filter( (todo) => todo.id === id);
+  let tempTodo = todoItemList.filter(todo => todo.id !== id);
+  todoItemList = tempTodo;
+
+  console.log(individualTodo);
+  console.log(tempTodo);
+  console.log(todoItemList);
+  console.log(id)
+
+}
+
+const checkTodo = (todoItem) => {
+  let id = parseInt(todoItem.parentElement.dataset.id);
+  console.log(id)
+}
+
+//todo submit button
 todoSubmit.addEventListener('click', (e) => {
   e.preventDefault()
   submitTodoForm()
 })
+
+//todo-box eventListener
+todoBox.addEventListener('click', (e)=> {
+  console.log(e.target)
+  if(e.target.classList.contains('fa-edit')){
+    console.log('edit icon has been clicked')
+    editTodo(e.target)
+  } else if(e.target.classList.contains('fa-trash')){
+    console.log('the trash icon has been clicked')
+    deleteTodo(e.target)
+  } else if (e.target.classList.contains('todo-check')){
+    console.log('you just clicked on the check-box')
+    checkTodo(e.target)
+  }
+})
+
+
+
+
+
