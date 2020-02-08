@@ -8,6 +8,7 @@ const todoSubmit = document.querySelector('#todo-submit');
 const todoDisplay = document.querySelector('#todo-display');
 const todoBox = document.querySelector('#todo-box');
 const formWrapper = document.querySelector('#form-wrapper');
+const todoCheck = document.querySelector('.todo-check');
 
 let todoItemList = [];
 let todoID = 0;
