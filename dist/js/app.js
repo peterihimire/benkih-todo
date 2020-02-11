@@ -8,7 +8,7 @@ const todoSubmit = document.querySelector('#todo-submit');
 const todoDisplay = document.querySelector('#todo-display');
 const todoBox = document.querySelector('#todo-box');
 const formWrapper = document.querySelector('#form-wrapper');
-const todoCheck = document.querySelector('.todo-check');
+
 
 let todoItemList = [];
 let todoID = 0;
@@ -58,10 +58,10 @@ const submitTodoForm = () => {
 
 const addTodo = (todo) => {
   const div = document.createElement('div');
-  div.classList.add('item');
+  div.classList.toggle('item');
   div.innerHTML = `
-    <div class="item-check " data-id=${todo.id} >
-      <input type="checkbox" class="todo-check" value="on" >
+    <div class="item-check check-slave " data-id=${todo.id} >
+      <input type="checkbox" class="todo-check" value="on"  >
     </div>
 
     <div class="item-text " >
@@ -113,6 +113,7 @@ const deleteTodo = (todoItem) => {
 
   console.log(individualTodo);
   console.log(tempTodo);
+  console.log(singleTodo)
   console.log(todoItemList);
   console.log(id)
 
@@ -120,7 +121,19 @@ const deleteTodo = (todoItem) => {
 
 const checkTodo = (todoItem) => {
   let id = parseInt(todoItem.parentElement.dataset.id);
+  let singleTodo = todoItem.parentElement.parentElement;
+
+  let todoText = singleTodo.children[1].firstElementChild.textContent;
+  let todoPtag = singleTodo.children[1].firstElementChild;
+
+  todoPtag.classList.toggle('strike-through')
+
+  
   console.log(id)
+  console.log(singleTodo)
+  console.log(todoPtag)
+  console.log(singleTodo.children[0])
+  console.log(todoText)
 }
 
 //todo submit button
@@ -138,7 +151,11 @@ todoBox.addEventListener('click', (e)=> {
   } else if(e.target.classList.contains('fa-trash')){
     console.log('the trash icon has been clicked')
     deleteTodo(e.target)
-  } else if (e.target.classList.contains('todo-check')){
+  }
+})
+
+todoBox.addEventListener('change', (e)=> {
+  if(e.target.classList.contains('todo-check')){
     console.log('you just clicked on the check-box')
     checkTodo(e.target)
   }

@@ -182,8 +182,7 @@ transform: rotate(45deg) translate(-2px, -11px)
 }
 
 .strike-through {
-  /* display: none; */
-  /* visibility: hidden; */
+  text-decoration: line-through;
 }
 
 /* ---------- checkbox design---------- */
@@ -272,6 +271,7 @@ input[type="checkbox"]:checked:after {
 
 
 
+
 .icon{
   margin: 0 0 0 1rem;
   color: var(--primaryColor);
@@ -330,6 +330,8 @@ button i {
 }
 
 /* ---------- End of App Section---------- */
+
+
 
 
 
