@@ -8,6 +8,7 @@ const todoSubmit = document.querySelector('#todo-submit');
 const todoDisplay = document.querySelector('#todo-display');
 const todoBox = document.querySelector('#todo-box');
 const formWrapper = document.querySelector('#form-wrapper');
+const navbarOverlay = document.querySelector('.navbar-overlay');
 
 
 let todoItemList = [];
@@ -22,15 +23,29 @@ navbarBtn.addEventListener('click' , () => {
   if(value){
       navbarLinks.classList.remove('navbar-collapse');
       navbarBtn.classList.remove('change');
+      navbarOverlay.classList.remove('transparent-background');
   }else{
       navbarLinks.classList.add('navbar-collapse');
       navbarBtn.classList.add('change');
+      navbarOverlay.classList.add('transparent-background');
   }
 })
 
-//Submit TODO Form
+navbarOverlay.addEventListener('click', (e)=> {
+  console.log(e.target)
+  console.log('navbar overlay has been clicked');
+  let value = navbarLinks.classList.contains('navbar-collapse');
+  if (value){
+    navbarLinks.classList.remove('navbar-collapse');
+    navbarBtn.classList.remove('change');
+    navbarOverlay.classList.remove('transparent-background');
+  }
+})
+
+//Submit TODO Form 
 const submitTodoForm = () => {
   const todoValue = todoInput.value;
+  //form validation
   if(todoValue === ""){
     todoFeedback.innerHTML = `<p>Value cannot be empty</p>`;
     todoFeedback.classList.add('error');
@@ -39,7 +54,7 @@ const submitTodoForm = () => {
       todoFeedback.remove('error');
     },3000)
   } else {
-    // todoDisplay.textContent = todoValue;
+    // creates an object when validation is passed
     todoInput.value = '';
 
     let todo = {
@@ -56,6 +71,7 @@ const submitTodoForm = () => {
   console.log(todoValue)
 }
 
+//adds a new todo div to the todo card
 const addTodo = (todo) => {
   const div = document.createElement('div');
   div.classList.toggle('item');
@@ -83,6 +99,7 @@ const addTodo = (todo) => {
   // todoBox.appendChild(div);
 }
 
+//updates when the edit icon is clicked
 const editTodo = (todoitem) => {
   let id = parseInt(todoitem.parentElement.dataset.id);
   let singleTodo = todoitem.parentElement.parentElement.parentElement;
@@ -103,6 +120,7 @@ const editTodo = (todoitem) => {
   console.log(todoItemList);
 }
 
+//updates when the delete icon is clicked
 const deleteTodo = (todoItem) => {
   let id = parseInt(todoItem.parentElement.dataset.id);
   let singleTodo = todoItem.parentElement.parentElement.parentElement;
@@ -119,6 +137,7 @@ const deleteTodo = (todoItem) => {
 
 }
 
+//updates when the checkbox is clicked
 const checkTodo = (todoItem) => {
   let id = parseInt(todoItem.parentElement.dataset.id);
   let singleTodo = todoItem.parentElement.parentElement;
