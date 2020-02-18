@@ -1,6 +1,7 @@
 // variables
 const navbarBtn = document.querySelector('.navbar-btn');
 const navbarLinks = document.querySelector('.navbar-links');
+const navbarOverlay = document.querySelector('.navbar-overlay');
 
 const todoFeedback = document.querySelector('.todo-feedback');
 const todoInput = document.querySelector('#todo-input');
@@ -8,7 +9,8 @@ const todoSubmit = document.querySelector('#todo-submit');
 const todoDisplay = document.querySelector('#todo-display');
 const todoBox = document.querySelector('#todo-box');
 const formWrapper = document.querySelector('#form-wrapper');
-const navbarOverlay = document.querySelector('.navbar-overlay');
+const refreshBtn = document.querySelector('#refresh-btn');
+
 
 
 let todoItemList = [];
@@ -42,6 +44,10 @@ navbarOverlay.addEventListener('click', (e)=> {
   }
 })
 
+
+
+
+
 //Submit TODO Form 
 const submitTodoForm = () => {
   const todoValue = todoInput.value;
@@ -65,6 +71,7 @@ const submitTodoForm = () => {
     todoID++;
     todoItemList.push(todo);
     addTodo(todo)
+    saveTodo()
 
     console.log(todoItemList);
   }
@@ -107,7 +114,7 @@ const editTodo = (todoitem) => {
   todoBox.removeChild(singleTodo);
   //remove from todoItemList array
   let individualTodo = todoItemList.filter( (todo) => todo.id === id);
-  //populate the remove todoItem from the array to the todoInput
+  //populate the removed todoItem from the array to the todoInput
   todoInput.value = individualTodo[0].name;
   //return the todo without the id & that gives us the updated todoItemList
   let tempTodo = todoItemList.filter(todo => todo.id !== id);
@@ -137,6 +144,15 @@ const deleteTodo = (todoItem) => {
 
 }
 
+
+
+const deleteTodoById = (id) => {
+
+}
+
+
+
+
 //updates when the checkbox is clicked
 const checkTodo = (todoItem) => {
   let id = parseInt(todoItem.parentElement.dataset.id);
@@ -155,32 +171,99 @@ const checkTodo = (todoItem) => {
   console.log(todoText)
 }
 
+
+
+//to refresh or reset the todo both from the todolist and from the local storage
+const setRefresh = (e) => {
+  console.log(e.target)
+  console.log('refresh button has been clicked');
+  const todoList = todoItemList.map((todo) => {
+    return todo.id
+  })
+  //will have to create the below function to work with id
+  console.log(todoBox.children)
+  todoList.forEach(id => deleteTodoById(id) )
+  console.log(todoList)
+}
+refreshBtn.addEventListener('click', setRefresh)
+
+
+
+
+
 //todo submit button
 todoSubmit.addEventListener('click', (e) => {
   e.preventDefault()
   submitTodoForm()
 })
 
-//todo-box eventListener
-todoBox.addEventListener('click', (e)=> {
-  console.log(e.target)
-  if(e.target.classList.contains('fa-edit')){
-    console.log('edit icon has been clicked')
-    editTodo(e.target)
-  } else if(e.target.classList.contains('fa-trash')){
-    console.log('the trash icon has been clicked')
-    deleteTodo(e.target)
-  }
+
+const setupApp = () => {
+  todoItemList = getTodos();
+  console.log(todoItemList)
+  populateTodo(todoItemList)
+  getOneTodo()
+  // setRefresh()
+}
+
+const populateTodo = (todoItemList) => {
+  todoItemList.forEach(todo => addTodo(todo))
+}
+
+
+
+
+
+
+//functions for local-storage
+const saveTodo = () => {
+  localStorage.setItem('todos', JSON.stringify(todoItemList));
+  console.log(todoItemList)
+}
+
+//get one todo by ID
+const getOneTodo = (id) => {
+  let todos = JSON.parse(localStorage.getItem('todos'))
+  return todos.find(function(todo){
+    todo.id === id;
+    console.log(todo.id, id)
+  })
+}
+
+const getTodos = () => {
+  return localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : []
+}
+
+
+
+
+
+
+// executes all these functions on app load
+document.addEventListener('DOMContentLoaded', () => {
+  setupApp()
+
+  //todo-box eventListener
+  todoBox.addEventListener('click', (e)=> {
+    console.log(e.target)
+    if(e.target.classList.contains('fa-edit')){
+      console.log('edit icon has been clicked')
+      editTodo(e.target)
+    } else if(e.target.classList.contains('fa-trash')){
+      console.log('the trash icon has been clicked')
+      deleteTodo(e.target)
+    }
+  })
+
+  todoBox.addEventListener('change', (e)=> {
+    if(e.target.classList.contains('todo-check')){
+      console.log('you just clicked on the check-box')
+      checkTodo(e.target)
+    }
+  })
+
+
 })
-
-todoBox.addEventListener('change', (e)=> {
-  if(e.target.classList.contains('todo-check')){
-    console.log('you just clicked on the check-box')
-    checkTodo(e.target)
-  }
-})
-
-
 
 
 
