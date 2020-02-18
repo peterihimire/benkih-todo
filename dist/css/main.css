@@ -251,17 +251,20 @@ input[type="checkbox"]:hover:after, input[type="checkbox"]:checked:hover:after{
 }*/
 
 input[type="checkbox"]:checked:after {
-  background: var(--mainGrey);
+  /* background: var(--mainGrey);
   content: '\2714';
   font-size: 2rem;
   color: #fff;
   color: black !important;
-  box-shadow: none !important;
+  box-shadow: none !important; */
   /* border-radius: .5rem; */
 } 
 
 input[type="checkbox"]:checked:after {
   /* background: var(--primaryColor) !important; */
+  background: var(--mainGrey);
+  content: '\2714';
+  font-size: 1.7rem;
   color: var(--primaryColor) !important;
   box-shadow: none !important;
 } 
