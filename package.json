@@ -4,7 +4,7 @@
   "description": "This is a todo-list app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [
     "todo",
@@ -14,5 +14,9 @@
     "benkih"
   ],
   "author": "Peter Ihimire",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://peterihimire.github.io/benkih-todo",
+  "dependencies": {
+    "gh-pages": "^2.2.0"
+  }
 }
