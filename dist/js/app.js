@@ -46,8 +46,6 @@ navbarOverlay.addEventListener('click', (e)=> {
 
 
 
-
-
 //Submit TODO Form 
 const submitTodoForm = () => {
   const todoValue = todoInput.value;
@@ -77,6 +75,7 @@ const submitTodoForm = () => {
   }
   console.log(todoValue)
 }
+
 
 //adds a new todo div to the todo card
 const addTodo = (todo) => {
@@ -135,18 +134,13 @@ const deleteTodo = (todoItem) => {
   let individualTodo = todoItemList.filter( (todo) => todo.id === id);
   let tempTodo = todoItemList.filter(todo => todo.id !== id);
   todoItemList = tempTodo;
+  saveTodo()
 
   console.log(individualTodo);
   console.log(tempTodo);
   console.log(singleTodo)
   console.log(todoItemList);
   console.log(id)
-
-}
-
-
-
-const deleteTodoById = (id) => {
 
 }
 
@@ -182,11 +176,19 @@ const setRefresh = (e) => {
   })
   //will have to create the below function to work with id
   console.log(todoBox.children)
-  todoList.forEach(id => deleteTodoById(id) )
+  todoList.forEach( id => deleteTodoById(id) )
   console.log(todoList)
 }
 refreshBtn.addEventListener('click', setRefresh)
 
+
+const deleteTodoById = (id) => {
+  console.log(id)
+  console.log(todoItemList)
+  todoItemList = todoItemList.filter(todo => todo.id !== id)
+  saveTodo()
+  console.log(todoItemList)
+}
 
 
 
