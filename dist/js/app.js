@@ -145,8 +145,6 @@ const deleteTodo = (todoItem) => {
 }
 
 
-
-
 //updates when the checkbox is clicked
 const checkTodo = (todoItem) => {
   let id = parseInt(todoItem.parentElement.dataset.id);
@@ -167,19 +165,30 @@ const checkTodo = (todoItem) => {
 
 
 
-//to refresh or reset the todo both from the todolist and from the local storage
-const setRefresh = (e) => {
+//to  reset the todo both from the todolist and from the local storage
+const setReset = (e) => {
   console.log(e.target)
   console.log('refresh button has been clicked');
   const todoList = todoItemList.map((todo) => {
     return todo.id
   })
-  //will have to create the below function to work with id
-  console.log(todoBox.children)
+
   todoList.forEach( id => deleteTodoById(id) )
   console.log(todoList)
+  console.log(todoBox)
+  console.log(todoBox.children)
+  let todoBoxChildren = todoBox.children;
+  let i ;
+  for(i = 0; i < todoBoxChildren.length; i++){
+    console.log(todoBoxChildren[i])
+    //remove todos with class of item only leaving the todo-feedback and form-wrapper divs
+    while(todoBoxChildren[i].classList.contains('item')){
+      todoBox.removeChild(todoBoxChildren[i])
+    }
+  }
+  console.log(todoBoxChildren)
 }
-refreshBtn.addEventListener('click', setRefresh)
+refreshBtn.addEventListener('click', setReset)
 
 
 const deleteTodoById = (id) => {
