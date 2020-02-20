@@ -46,8 +46,6 @@ navbarOverlay.addEventListener('click', (e)=> {
 
 
 
-
-
 //Submit TODO Form 
 const submitTodoForm = () => {
   const todoValue = todoInput.value;
@@ -77,6 +75,7 @@ const submitTodoForm = () => {
   }
   console.log(todoValue)
 }
+
 
 //adds a new todo div to the todo card
 const addTodo = (todo) => {
@@ -135,6 +134,7 @@ const deleteTodo = (todoItem) => {
   let individualTodo = todoItemList.filter( (todo) => todo.id === id);
   let tempTodo = todoItemList.filter(todo => todo.id !== id);
   todoItemList = tempTodo;
+  saveTodo()
 
   console.log(individualTodo);
   console.log(tempTodo);
@@ -143,14 +143,6 @@ const deleteTodo = (todoItem) => {
   console.log(id)
 
 }
-
-
-
-const deleteTodoById = (id) => {
-
-}
-
-
 
 
 //updates when the checkbox is clicked
@@ -173,20 +165,39 @@ const checkTodo = (todoItem) => {
 
 
 
-//to refresh or reset the todo both from the todolist and from the local storage
-const setRefresh = (e) => {
+//to  reset the todo both from the todolist and from the local storage
+const setReset = (e) => {
   console.log(e.target)
   console.log('refresh button has been clicked');
   const todoList = todoItemList.map((todo) => {
     return todo.id
   })
-  //will have to create the below function to work with id
-  console.log(todoBox.children)
-  todoList.forEach(id => deleteTodoById(id) )
-  console.log(todoList)
-}
-refreshBtn.addEventListener('click', setRefresh)
 
+  todoList.forEach( id => deleteTodoById(id) )
+  console.log(todoList)
+  console.log(todoBox)
+  console.log(todoBox.children)
+  let todoBoxChildren = todoBox.children;
+  let i ;
+  for(i = 0; i < todoBoxChildren.length; i++){
+    console.log(todoBoxChildren[i])
+    //remove todos with class of item only leaving the todo-feedback and form-wrapper divs
+    while(todoBoxChildren[i].classList.contains('item')){
+      todoBox.removeChild(todoBoxChildren[i])
+    }
+  }
+  console.log(todoBoxChildren)
+}
+refreshBtn.addEventListener('click', setReset)
+
+
+const deleteTodoById = (id) => {
+  console.log(id)
+  console.log(todoItemList)
+  todoItemList = todoItemList.filter(todo => todo.id !== id)
+  saveTodo()
+  console.log(todoItemList)
+}
 
 
 
